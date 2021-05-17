@@ -1,15 +1,8 @@
 <template>
   <div class="home">
-<!--    <img alt="Vue logo" src="../assets/logo.png">-->
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-<!--    <HeadNavigator></HeadNavigator>-->
-
-    <br>
     <el-row style=" background-color:#545c64 ">
-      <el-col :span="24">
-        <el-col :offset="8" :span="8">
-          <HeadNavigator></HeadNavigator>
-        </el-col>
+      <el-col :offset="8" :span="8">
+        <HeadNavigator></HeadNavigator>
       </el-col>
     </el-row>
 
