@@ -20,7 +20,7 @@
 
     <el-submenu index="4">
       <template v-slot:title>发布信息</template>
-      <el-menu-item index="2-2">寻人信息</el-menu-item>
+      <el-menu-item @click="addLostMessage">寻人信息</el-menu-item>
       <el-menu-item index="2-3">寻物信息</el-menu-item>
     </el-submenu>
     <el-menu-item index="5" >消息中心</el-menu-item>
@@ -28,15 +28,20 @@
       <template v-slot:title>用户</template>
       <el-menu-item @click="logout">登出</el-menu-item>
     </el-submenu>
+    <AddLostMessage v-model:lost_dialog_visible="add_lost_dialog_visible"></AddLostMessage>
   </el-menu>
+
 </template>
 
 <script>
+import AddLostMessage from "./AddLostMessage";
 export default {
   name:"HeadNavigator",
+  components: {AddLostMessage},
   data() {
     return {
       activeIndex: '1',
+      add_lost_dialog_visible: false
     };
   },
   methods: {
@@ -48,6 +53,9 @@ export default {
     logout(){
       localStorage.clear()
       this.$router.push('/login')
+    },
+    addLostMessage(){
+      this.add_lost_dialog_visible = true
     }
 
   },
