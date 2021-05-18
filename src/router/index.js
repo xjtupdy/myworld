@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../components/Home.vue'
-import LogIn from "../components/LogIn";
-import User from "../components/User"
-import SeekHall from "../components/SeekHall";
-import LostHall from "../components/LostHall";
-import MyLostHall from "../components/MyLostHall";
-import MySeekHall from "../components/MySeekHall";
+import LogIn from "../components/user/LogIn";
+import User from "../components/user/User"
+import SeekHall from "../components/seek/SeekHall";
+import LostHall from "../components/lost/LostHall";
+import MyLostHall from "../components/lost/MyLostHall";
+import MySeekHall from "../components/seek/MySeekHall";
 const routes = [
   {
     path: '/',

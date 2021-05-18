@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import MyLostMessage from "./MyLostMessage";
+import MyLostMessage from "../lost/MyLostMessage";
 
 export default {
   name: "User",
