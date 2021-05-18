@@ -7,13 +7,13 @@
       <el-form-item label="简要描述" :label-width="formLabelWidth">
         <el-input v-model="form.description" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="捡拾地址" :label-width="formLabelWidth">
+      <el-form-item label="丢失地址" :label-width="formLabelWidth">
         <el-input v-model="form.location" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="拾取时间" :label-width="formLabelWidth">
+      <el-form-item label="丢失时间" :label-width="formLabelWidth">
         <span class="demonstration"></span>
         <el-date-picker
-            v-model="form.release_time"
+            v-model="form.time"
             type="datetime"
             placeholder="选择日期时间">
         </el-date-picker>
@@ -33,11 +33,13 @@ export default {
   name: "AddSeekMessage",
   data(){
     return{
+      formLabelWidth: '120px',
       form: {
         category:'',
         description:'',
+        photo:'',
         location:"",
-        release_time: ''
+        time: ''
       },
     }
   },
@@ -51,8 +53,9 @@ export default {
       this.axios.post('http://10.181.39.60:5001/postSeekProperty',{
         category:this.form.category,
         description:this.form.description,
+        photo:this.form.photo,
         location:this.form.location,
-        time:this.form.release_time,
+        time:this.form.time,
         userID:localStorage.getItem("userid")
       }).then((response) => {
         console.log(response)

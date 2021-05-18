@@ -4,9 +4,9 @@
     <el-descriptions class="margin-top" :title="message.category" :column="3" :size="size" border>
 
       <template #extra>
-        <el-button size="small" type="primary"  icon="el-icon-user" @click="openChange">发布人</el-button>
-        <el-button size="small" type="primary" icon="el-icon-bell" @click="openChange">确认已领</el-button>
-        <el-button size="small" type="danger" icon="el-icon-phone" @click="delost">举报</el-button>
+        <el-button size="small" type="primary"  icon="el-icon-user" @click="showPublisher">发布人</el-button>
+        <el-button size="small" type="primary" icon="el-icon-bell" @click="confirmReceive">确认已领</el-button>
+        <el-button size="small" type="danger" icon="el-icon-phone" @click="report">举报</el-button>
         <el-tag :type="status[message.status]" style="margin-left: 20px">{{statusInfo[message.status]}}</el-tag>
       </template>
       <el-descriptions-item>
@@ -80,7 +80,18 @@ export default {
       }
     };
   },
-  props:['message']
+  props:['message'],
+  methods:{
+    showPublisher(){
+
+    },
+    confirmReceive(){
+
+    },
+    report(){
+
+    }
+  }
 }
 </script>
 

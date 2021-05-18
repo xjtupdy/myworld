@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建寻人信息" :model-value="lost_dialog_visible">
+  <el-dialog title="新建寻人信息" :model-value="lost_dialog_visible" :before-close="hideLostDialog">
     <el-form :model="form">
       <el-form-item label="物品名称" :label-width="formLabelWidth">
         <el-input v-model="form.category" autocomplete="off"></el-input>

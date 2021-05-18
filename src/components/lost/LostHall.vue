@@ -1,11 +1,13 @@
 <template>
   <p>LostHall</p>
+  <SerarchLost></SerarchLost>
   <LostMessage v-for="lostProperty in lostProperties" :message="lostProperty" :key="lostProperty.id"></LostMessage>
 <!--  <MyLostMessage v-for="lostProperty in lostProperties" :message="lostProperty" :key="lostProperty.id"></MyLostMessage>-->
 </template>
 
 <script>
 import LostMessage from "./LostMessage";
+import SerarchLost from "./SerarchLost";
 export default {
   name: "LostHall",
   data(){
@@ -14,7 +16,7 @@ export default {
       seekProperties:[]
     }
   },
-  components: {LostMessage},
+  components: {SerarchLost, LostMessage},
   created() {
     if(localStorage.getItem("login") == '1'){
       this.$router.push("/home/lost-hall")
