@@ -49,7 +49,7 @@
       v-model="drawer"
       direction="rtl"
       destroy-on-close>
-    <el-form :model="form" style="margin-left: 20px; margin-right: 20px">
+    <el-form :model="form" style="margin-left: 20px; margin-right: 20px" :label-width="formLabelWidth">
       <el-form-item label="失物名称" :label-width="formLabelWidth">
         <el-input v-model="form.category" autocomplete="off"></el-input>
       </el-form-item>

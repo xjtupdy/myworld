@@ -165,7 +165,7 @@ export default {
         release_userID:localStorage.getItem("userid"),
         lostID:this.form.lostID,
         status:status,
-        pick_location:this.form.location
+        pick_location:this.form.pick_location
       }).then((response) => {
         console.log(response)
         location.reload();

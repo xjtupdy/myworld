@@ -1,16 +1,22 @@
 <template>
   <el-dialog title="新建寻人信息" :model-value="lost_dialog_visible" :before-close="hideLostDialog">
-    <el-form :model="form">
-      <el-form-item label="物品名称" :label-width="formLabelWidth">
+    <el-form :model="form" style="margin-left: 20px; margin-right: 20px" :label-width="formLabelWidth">
+      <el-form-item label="拾物名称" :label-width="formLabelWidth">
         <el-input v-model="form.category" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="拾物图片" :label-width="formLabelWidth">
+        <el-image style="width: 200px; height: 200px"
+                  fit="cover"
+                  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg">
+        </el-image>
       </el-form-item>
       <el-form-item label="简要描述" :label-width="formLabelWidth">
         <el-input v-model="form.description" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="拾取地址" :label-width="formLabelWidth">
+      <el-form-item label="拾取位置" :label-width="formLabelWidth">
         <el-input v-model="form.pick_location" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="放置地址" :label-width="formLabelWidth">
+      <el-form-item label="放置位置" :label-width="formLabelWidth">
         <el-input v-model="form.location" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="拾取时间" :label-width="formLabelWidth">
