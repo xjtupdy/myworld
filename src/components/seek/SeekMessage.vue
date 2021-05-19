@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <el-descriptions class="margin-top" :title="message.category" :column="3" :size="size" border>
       <template #extra>
-        <el-button size="small" type="primary"  icon="el-icon-user" @click="showPublisher">发布人</el-button>
+        <el-button size="small" type="primary"  icon="el-icon-user" @click="showPublisher(1)">发布人</el-button>
         <el-button size="small" type="danger" icon="el-icon-phone" @click="report">举报</el-button>
         <el-tag :type="status[message.status]" style="margin-left: 20px">{{statusInfo[message.status]}}</el-tag>
       </template>
@@ -44,6 +44,8 @@
   <br>
   <el-divider></el-divider>
   <br>
+
+
 </template>
 
 <script>
@@ -65,8 +67,8 @@ export default {
   },
   props:['message'],
   methods:{
-    showPublisher(){
-
+    showPublisher(userID){
+       this.$emit('showPublisher',userID);
     },
     report(){
 
