@@ -10,7 +10,7 @@ import SignUp from "../components/user/SignUp";
 const routes = [
   {
     path: '/',
-    redirect: 'home'
+    redirect: 'LogIn'
   },
   {
     path: '/home',
