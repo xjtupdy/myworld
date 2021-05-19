@@ -19,7 +19,7 @@
 
             </el-form-item>
           </el-form>
-          <a @click="goLogUp" style="text-decoration:underline;float: right;color: dodgerblue">还没有账号，前往注册</a>
+          <a @click="goSignUp" style="text-decoration:underline;float: right;color: dodgerblue">还没有账号，前往注册</a>
         </div>
       </el-col>
     </el-row>
@@ -79,8 +79,8 @@ export default {
         }
       })
     },
-    goLogUp(){
-      this.$router.push('LogUp')
+    goSignUp(){
+      this.$router.push('/SignUp')
     }
   }
 }
