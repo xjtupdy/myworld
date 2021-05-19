@@ -1,21 +1,27 @@
 <template>
   <p>SeekHall</p>
-  <SeekMessage v-for="seekProperty in seekProperties" :message="seekProperty" :key="seekProperty.id"></SeekMessage>
+  <SearchSeek></SearchSeek>
+  <SeekMessage v-for="seekProperty in seekProperties"
+               :message="seekProperty"
+               :key="seekProperty.id"
+                @showPublisher="publisherInfo"></SeekMessage>
+  <SeeUserInfo v-model:Visible="dialogVisible"></SeeUserInfo>
 </template>
 
 <script>
 
 import SeekMessage from "./SeekMessage";
-
+import SearchSeek from "./SearchSeek";
+import SeeUserInfo from "@/components/user/SeeUserInfo";
 export default {
   name: "SeekHall",
   data() {
     return {
       seekProperties: [{id: 0, category: '学生卡', status: '1'}, {id: 1, category: '學生卡'}],
-
+      dialogVisible:false
     }
   },
-  components: {SeekMessage},
+  components: {SeekMessage,SearchSeek,SeeUserInfo},
   created() {
     if(localStorage.getItem("login") == '1'){
       this.$router.push("/home/seek-hall")
@@ -27,6 +33,14 @@ export default {
     }
     else {
       this.$router.push("/login")
+    }
+  },
+  methods:{
+    publisherInfo(userID){
+       if(userID == userID){
+         this.dialogVisible = true;
+         console.log(this.dialogVisible);
+       }
     }
   }
 }
