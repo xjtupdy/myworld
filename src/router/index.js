@@ -9,7 +9,7 @@ import MySeekHall from "../components/seek/MySeekHall";
 const routes = [
   {
     path: '/',
-    redirect: 'home'
+    redirect: 'LogIn'
   },
   {
     path: '/home',
