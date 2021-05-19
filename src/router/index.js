@@ -53,15 +53,15 @@ const routes = [
     component: LostHall
   },
   {
-    path: '/SignUp',
-    name: 'SignUp',
-    component: SignUp
-  },
-  {
     path: '/login',
     name: 'LogIn',
     component: LogIn
   },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp
+  }
 ]
 
 const router = createRouter({

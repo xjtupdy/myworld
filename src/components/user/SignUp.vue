@@ -36,9 +36,11 @@
               <el-input type="textarea" v-model="form.individual_resume"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="bu" type="primary" @click="submitForm('form')" >注册</el-button>
+
             </el-form-item>
           </el-form>
+          <el-button class="bu" type="primary" @click="submitForm('form')" >注册</el-button>
+          <el-button class="bu" type="primary" @click="back('form')" >返回登录</el-button>
         </div>
       </el-col>
     </el-row>
@@ -91,6 +93,9 @@ export default {
     }
   },
   methods: {
+    back(){
+      this.$router.push("/login")
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -175,8 +180,9 @@ export default {
   margin-left: 120px;
 }
 .bu{
-  width: 100%;
-  margin-left: 0;
+  width: 30%;
+  margin-left: 40px;
+  margin-right: 10px;
   margin-bottom: 10px;
 }
 </style>

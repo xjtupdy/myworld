@@ -63,16 +63,26 @@
   <el-drawer
       title="请填写修改的内容"
       v-model="drawer"
-      :direction="direction"
+      direction="rtl"
       destroy-on-close>
-    <el-form :model="form" style="margin-left: 20px; margin-right: 20px">
-      <el-form-item label="物品名称" :label-width="formLabelWidth">
+    <el-form :model="form" style="margin-left: 20px; margin-right: 20px" :label-width="formLabelWidth">
+      <el-form-item label="拾物名称" :label-width="formLabelWidth">
         <el-input v-model="form.category" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="拾物图片" :label-width="formLabelWidth">
+        <el-image style="width: 200px; height: 200px"
+                  fit="cover"
+                  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                  :preview-src-list="['https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg']">
+        </el-image>
       </el-form-item>
       <el-form-item label="简要描述" :label-width="formLabelWidth">
         <el-input v-model="form.description" autocomplete="off" type = "textarea"></el-input>
       </el-form-item>
-      <el-form-item label="捡拾地址" :label-width="formLabelWidth">
+      <el-form-item label="拾取位置" :label-width="formLabelWidth">
+        <el-input v-model="form.pick_location" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="放置位置" :label-width="formLabelWidth">
         <el-input v-model="form.location" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="拾取时间" :label-width="formLabelWidth">
@@ -83,8 +93,19 @@
             placeholder="选择日期时间">
         </el-date-picker>
       </el-form-item>
+      <el-form-item v-if="message.status !== 3" label="当前状态">
+        <el-select v-model="form.status">
+          <el-option label="发布中" value="发布中" key="1"></el-option>
+          <el-option label="已完成" value="已完成" key="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item v-if="message.status === 3" label="当前状态">
+        <el-select model-value="审核中" disabled><!--    model-value无法随选中的变更      -->
+          <el-option key="1" label="审核中" value="1" disabled></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
-        <el-button  type="primary" @click="editLost">修改</el-button>
+        <el-button  type="primary" @click="editLost" style="width: 35%">修改</el-button>
       </el-form-item>
     </el-form>
   </el-drawer>
@@ -100,24 +121,17 @@ export default {
       formLabelWidth: '120px',
       status:{
         "1":"success",
-        "2":"danger"
+        "2":"info",
+        "3":"danger"
       },
       statusInfo:{
         "1":"发布中",
-        "2":"审核中",
-        "3":"已完成"
+        "2":"已完成",
+        "3":"审核中",
+
       },
       drawer:false,
-      direction: 'rtl',
-      form: {
-        category:this.message.category,
-        description:this.message.description,
-        location:this.message.location,
-        pick_time:this.message.pick_time,
-        lostID:this.message.lostID,
-        status:this.message.status
-      },
-      // form:this.message  由于双向绑定改变drawer中的值外面展示的值也会改变
+      form: JSON.parse(JSON.stringify(this.message)), //对象的深拷贝
     };
   },
   props:['message'],
@@ -135,6 +149,14 @@ export default {
     },
     editLost(){
       this.drawer = false
+      let status = 1
+      if(this.form.status === this.statusInfo["1"]){
+        status = 1
+      }else if(this.form.status === this.statusInfo["2"]){
+        status = 2
+      }else{
+        status = 3
+      }
       this.axios.post(api.http + '/editLostProperty',{
         category:this.form.category,
         description:this.form.description,
@@ -142,13 +164,17 @@ export default {
         pick_time:this.form.pick_time,
         release_userID:localStorage.getItem("userid"),
         lostID:this.form.lostID,
-        status:this.form.status
+        status:status,
+        pick_location:this.form.location
       }).then((response) => {
         console.log(response)
         location.reload();
       })
     },
   },
+  created() {
+    this.form.status = this.statusInfo[this.form.status]
+  }
 }
 </script>
 

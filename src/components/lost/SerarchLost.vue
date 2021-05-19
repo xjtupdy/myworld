@@ -46,7 +46,7 @@ export default defineComponent ({
 
 >>> .el-input__inner{
 
-  height: 65px;
+  height: 60px;
 }
 
 </style>

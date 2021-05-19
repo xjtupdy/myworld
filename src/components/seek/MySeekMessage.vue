@@ -50,22 +50,40 @@
       direction="rtl"
       destroy-on-close>
     <el-form :model="form" style="margin-left: 20px; margin-right: 20px">
-      <el-form-item label="物品名称" :label-width="formLabelWidth">
+      <el-form-item label="失物名称" :label-width="formLabelWidth">
         <el-input v-model="form.category" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="失物图片" :label-width="formLabelWidth">
+        <el-image style="width: 200px; height: 200px"
+                  fit="cover"
+                  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                  :preview-src-list="['https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg']">
+        </el-image>
       </el-form-item>
       <el-form-item label="简要描述" :label-width="formLabelWidth">
         <el-input v-model="form.description" autocomplete="off" type = "textarea"></el-input>
       </el-form-item>
-      <el-form-item label="捡拾地址" :label-width="formLabelWidth">
+      <el-form-item label="丢失位置" :label-width="formLabelWidth">
         <el-input v-model="form.location" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="丢失时间" :label-width="formLabelWidth">
         <span class="demonstration"></span>
         <el-date-picker
-            v-model="form.pick_time"
+            v-model="form.time"
             type="datetime"
             placeholder="选择日期时间">
         </el-date-picker>
+      </el-form-item>
+      <el-form-item v-if="message.status !== 3" label="当前状态">
+        <el-select v-model="form.status">
+          <el-option label="发布中" value="发布中" key="1"></el-option>
+          <el-option label="已完成" value="已完成" key="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item v-if="message.status === 3" label="当前状态">
+        <el-select model-value="审核中" disabled><!--    model-value无法随选中的变更      -->
+          <el-option key="1" label="审核中" value="1" disabled></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button  type="primary" @click="editSeek">修改</el-button>
@@ -85,21 +103,15 @@ export default {
       formLabelWidth: '120px',
       status:{
         "1":"success",
-        "2":"danger"
+        "2":"info",
+        "3":"danger"
       },
       statusInfo:{
         "1":"发布中",
-        "2":"审核中",
-        "3":"已完成"
+        "2":"已完成",
+        "3":"审核中",
       },
-      form: {
-        category:this.message.category,
-        description:this.message.description,
-        location:this.message.location,
-        pick_time: this.message.pick_time,
-        seekID:this.message.seekID,
-        status:this.message.status
-      },
+      form: JSON.parse(JSON.stringify(this.message)), //对象的深拷贝
     }
   },
   props:['message'],
@@ -109,14 +121,22 @@ export default {
     },
     editSeek(){
       this.drawer = false
+      let status = 1
+      if(this.form.status === this.statusInfo["1"]){
+        status = 1
+      }else if(this.form.status === this.statusInfo["2"]){
+        status = 2
+      }else{
+        status = 3
+      }
       this.axios.post(api.http + '/editSeekProperty',{
         category:this.form.category,
         description:this.form.description,
         location:this.form.location,
-        time:this.form.pick_time,
+        time:this.form.time,
         userID:localStorage.getItem("userid"),
         seekID:this.form.seekID,
-        status:this.form.status
+        status:status
       }).then((response) => {
         console.log(response)
         location.reload();
@@ -130,6 +150,9 @@ export default {
         location.reload();
       })
     },
+  },
+  created() {
+    this.form.status = this.statusInfo[this.form.status]
   }
 }
 </script>
