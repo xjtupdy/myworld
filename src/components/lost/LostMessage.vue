@@ -71,12 +71,13 @@ export default {
       size: '',
       status:{
         "1":"success",
-        "2":"danger"
+        "2":"info",
+        "3":"danger"
       },
       statusInfo:{
         "1":"发布中",
-        "2":"审核中",
-        "3":"已完成"
+        "2":"已完成",
+        "3":"审核中",
       }
     };
   },

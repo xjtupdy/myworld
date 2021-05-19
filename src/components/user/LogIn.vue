@@ -80,7 +80,7 @@ export default {
       })
     },
     goLogUp(){
-      this.$router.push('LogUp')
+      this.$router.push('/signup')
     }
   }
 }

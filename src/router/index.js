@@ -6,6 +6,7 @@ import SeekHall from "../components/seek/SeekHall";
 import LostHall from "../components/lost/LostHall";
 import MyLostHall from "../components/lost/MyLostHall";
 import MySeekHall from "../components/seek/MySeekHall";
+import SignUp from "../components/user/SignUp";
 const routes = [
   {
     path: '/',
@@ -56,7 +57,11 @@ const routes = [
     name: 'LogIn',
     component: LogIn
   },
-
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp
+  }
 ]
 
 const router = createRouter({

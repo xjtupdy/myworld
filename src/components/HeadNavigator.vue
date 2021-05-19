@@ -32,7 +32,6 @@
     <AddLostMessage v-model:lost_dialog_visible="add_lost_dialog_visible"></AddLostMessage>
     <AddSeekMessage v-model:seek_dialog_visible="add_seek_dialog_visible"></AddSeekMessage>
   </el-menu>
-
 </template>
 
 <script>
@@ -52,7 +51,9 @@ export default {
     handleSelect(key, keyPath) {
       key
       keyPath
-      // console.log(key, keyPath);
+      // console.log("key", key)
+      // console.log("keyPath", keyPath);// 点击子按钮会有俩值
+
     },
     logout(){
       localStorage.clear()
@@ -67,30 +68,17 @@ export default {
 
   },
   mounted() {
-    console.log(this.$route.path)
-
     this.activeIndex = this.$route.path
-    // if(this.$route.path.indexOf("/my-lost-hall") > 0){
-    //   this.activeIndex = '3-1'
-    // }else if(this.$route.path.indexOf("/my-seek-hall") > 0){
-    //   this.activeIndex = '3-2'
-    // }else if(this.$route.path.indexOf("/lost-hall") > 0){
-    //   this.activeIndex = '1'
-    // }else if(this.$route.path.indexOf("/seek-hall") > 0){
-    //   this.activeIndex = '2'
-    // }else if(this.$route.path.indexOf("/user") > 0){
-    //   this.activeIndex = 'this.$route.path'
-    // }
-
+    if(this.$route.path === '/home'){
+      this.$router.push('/home/lost-hall')
+      this.activeIndex = '/home/lost-hall'
+    }
+    window.addEventListener('hashchange',()=> {
+      this.activeIndex = this.$route.path
+    },false);
   }
 }
 </script>
 
 <style scoped>
-.world_row{
-  /*display:flex;*/
-  /*flex-wrap: wrap;*/
-}
-
-
 </style>

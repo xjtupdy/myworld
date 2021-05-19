@@ -5,7 +5,6 @@
         <HeadNavigator></HeadNavigator>
       </el-col>
     </el-row>
-
     <el-row>
       <el-col :span="18" :offset="3">
         <router-view></router-view>
